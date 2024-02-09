@@ -9,7 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+app.get("",(req,res) => {
+    res.render("http://localhost:5173");
+})
 
 app.post("/clone", async (req,res) => {
     const {repoUrl,folderName} = req.body;
