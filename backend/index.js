@@ -2,20 +2,44 @@ import express from "express";
 import cors from "cors";
 import simpleGit from "simple-git";
 import fs from "fs";
-
+import { Octokit } from "@octokit/rest"
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("",(req,res) => {
-    res.render("http://localhost:5173");
+
+const octokit = new Octokit({
+    auth: 'GITHUB_TOKEN'
 })
 
+
+app.post("/getRepo", async (req,res) => {
+    const {username} = req.body;
+    const repo = await octokit.repos.listForUser({
+        username
+    })
+    const repoData = repo.data.map(repo => ({
+        htmlUrl: repo.html_url,
+        name: repo.name
+    }));
+
+    console.log("User Repositories URLs:", repoData);
+    if(repoData) {
+        res.status(200).json({repoData});
+    } else {
+        res.status(500).json({mg:"err"});
+    }
+
+})
+
+
+
 app.post("/clone", async (req,res) => {
-    const {repoUrl,folderName} = req.body;
-    await simpleGit().clone(repoUrl,`./new/${folderName}`)
+    const {repoUrl,repoName} = req.body;
+    await simpleGit().clone(repoUrl,`./new/${repoName}`)
+  
     .then((success) => {
         res.status(200).json({message:success.message});
     })
@@ -33,6 +57,14 @@ app.delete("/delete", async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+
+// app.post("/push", async (req,res) => {
+//     const {repoUrl, message} = req.body;
+
+//     await simpleGit().add("./*");
+//     await simpleGit().commit(message)
+// })
 
 
 app.listen(3000,() => {
