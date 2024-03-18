@@ -1,0 +1,15 @@
+{
+  "name": "basicgit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd backend && npm install",
+    "start-server":"cd backend && node index.js",
+    "install-client":"cd frontend && npm install",
+    "start-client":"cd frontend && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

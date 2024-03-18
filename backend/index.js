@@ -11,7 +11,7 @@ app.use(express.json());
 
 
 const octokit = new Octokit({
-    auth: 'GITHUB_TOKEN'
+    auth: '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'
 })
 
 
