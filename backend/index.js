@@ -3,7 +3,8 @@ import cors from "cors";
 import simpleGit from "simple-git";
 import fs from "fs";
 import { Octokit } from "@octokit/rest"
-
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -11,7 +12,7 @@ app.use(express.json());
 
 
 const octokit = new Octokit({
-    auth: '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'
+    auth: process.env.AUTH_KEY
 })
 
 
