@@ -17,7 +17,7 @@ function App() {
 
       const repoUrl = repository.repoData[index].htmlUrl;
       const repoName = repository.repoData[index].name;
-      await axios.post('http://localhost:3000/clone', {
+      await axios.post('https://basic-git.onrender.com/clone', {
         repoUrl,
         repoName,
       });
@@ -42,7 +42,7 @@ function App() {
       });
 
       const folderName = repository.repoData[index].name;
-      await axios.delete('http://localhost:3000/delete', {
+      await axios.delete('https://basic-git.onrender.com/delete', {
         data: { folderName },
       });
       console.log('Remove successful');
@@ -59,7 +59,7 @@ function App() {
 
   const getRepo = async () => {
     try {
-      const repo = await axios.post('http://localhost:3000/getRepo', {
+      const repo = await axios.post('https://basic-git.onrender.com/getRepo', {
         username,
       });
 
