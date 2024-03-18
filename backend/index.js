@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin:"https://basicgit.onrender.com/"
+    origin:"https://basicgit.onrender.com"
 }));
 app.use(express.json());
 
